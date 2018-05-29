@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Виталий Зюзин](https://up.htmlacademy.ru/ecmascript/5/user/16934).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Щепотьев](https://htmlacademy.ru/profile/zeckson).
 
 ---
 
