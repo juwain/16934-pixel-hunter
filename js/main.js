@@ -30,27 +30,30 @@ const ARROWS_TEMPLATE = `
 `;
 
 const DIRECTION = {
-  backwards: `ArrowLeft`,
-  forwards: `ArrowRight`
+  backwards: 37,
+  forwards: 39
 };
 
 const mainTemplate = document.querySelector(`main.central`);
 const screens = SCREEN_IDS.map((id) => document.getElementById(id));
 let currentScreenIndex = 0;
 
-const clearScreen = () => {
-  mainTemplate.innerHTML = ``;
-};
-
 const renderScreen = (index) => {
-  if (screens[index]) {
-    currentScreenIndex = index;
+  const minScreenIndex = 0;
+  const maxScreenIndex = screens.length - 1;
 
-    clearScreen();
-
-    const screenTemplate = screens[index].content;
-    mainTemplate.appendChild(screenTemplate.cloneNode(true));
+  if (index < minScreenIndex) {
+    index = maxScreenIndex;
+  } else if (index > maxScreenIndex) {
+    index = minScreenIndex;
   }
+
+  currentScreenIndex = index;
+
+  mainTemplate.innerHTML = ``;
+
+  const screenTemplate = screens[index].content;
+  mainTemplate.appendChild(screenTemplate.cloneNode(true));
 };
 
 const navigateBackwards = () => {
@@ -61,8 +64,8 @@ const navigateForwards = () => {
   renderScreen(currentScreenIndex + 1);
 };
 
-const globalKeyDownHandler = (event) => {
-  switch (event.key) {
+const globalKeyDownHandler = (evt) => {
+  switch (evt.keyCode) {
     case DIRECTION.backwards:
       navigateBackwards();
       break;
@@ -73,24 +76,15 @@ const globalKeyDownHandler = (event) => {
   }
 };
 
-const renderNavigationControls = () => {
-  document.body.insertAdjacentHTML(`beforeend`, ARROWS_TEMPLATE);
-};
+document.body.insertAdjacentHTML(`beforeend`, ARROWS_TEMPLATE);
+document.addEventListener(`keydown`, globalKeyDownHandler);
 
-const addAppHandlers = () => {
-  document.addEventListener(`keydown`, globalKeyDownHandler);
+const btnBackwards = document.querySelector(`.arrows__btn:first-of-type`);
+const btnForwards = document.querySelector(`.arrows__btn:first-of-type + .arrows__btn:last-of-type`);
 
-  const btnBackwards = document.querySelector(`.arrows__btn:first-of-type`);
-  const btnForwards = document.querySelector(`.arrows__btn:first-of-type + .arrows__btn:last-of-type`);
+btnBackwards.addEventListener(`click`, navigateBackwards);
+btnForwards.addEventListener(`click`, navigateForwards);
 
-  if (btnBackwards && btnForwards) {
-    btnBackwards.addEventListener(`click`, navigateBackwards);
-    btnForwards.addEventListener(`click`, navigateForwards);
-  }
-};
-
-renderNavigationControls();
-addAppHandlers();
 renderScreen(currentScreenIndex);
 
 
