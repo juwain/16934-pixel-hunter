@@ -1,15 +1,10 @@
 import createElementFromTemplate from './createElementFromTemplate.js';
 import renderScreen from './renderScreen.js';
 import game1Screen from './game-1.js';
-// import greetingScreen from './greeting.js';
+import {backButtonTemplate, onButtonBackClick} from './back-button.js';
 
 const html = createElementFromTemplate(`<header class="header">
-  <div class="header__back">
-    <button class="back">
-      <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-      <img src="img/logo_small.svg" width="101" height="44">
-    </button>
-  </div>
+  ${backButtonTemplate}
 </header>
 <div class="rules">
   <h1 class="rules__title">Правила</h1>
@@ -41,7 +36,7 @@ const html = createElementFromTemplate(`<header class="header">
 const formPlayerInfo = html.querySelector(`.rules__form`);
 const inputPlayerName = html.querySelector(`.rules__input`);
 const btnSubmitForm = html.querySelector(`.continue`);
-// const btnReturn = html.querySelector(`.back`);
+const btnBack = html.querySelector(`button.back`);
 
 formPlayerInfo.addEventListener(`submit`, (evt) => {
   evt.preventDefault();
@@ -53,11 +48,7 @@ inputPlayerName.addEventListener(`input`, () => {
   btnSubmitForm.disabled = !inputPlayerName.value.trim().length > 0;
 });
 
-// btnReturn.addEventListener(`click`, () => {
-//   renderScreen(greetingScreen);
-// });
-
-// console.log(game1Screen, greetingScreen);
+btnBack.addEventListener(`click`, onButtonBackClick);
 
 export default html;
 
