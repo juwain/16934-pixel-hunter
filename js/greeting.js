@@ -28,9 +28,7 @@ const html = createElementFromTemplate(`<div class="greeting central--blur">
 
 const btnShowNextScreen = html.querySelector(`.greeting__continue`);
 
-btnShowNextScreen.addEventListener(`click`, () => {
-  renderScreen(rulesScreen);
-});
+btnShowNextScreen.addEventListener(`click`, () => renderScreen(rulesScreen));
 
 export default html;
 

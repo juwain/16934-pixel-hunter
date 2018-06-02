@@ -58,9 +58,7 @@ const html = createElementFromTemplate(`<header class="header">
 const formButtons = html.querySelectorAll(`.game__option`);
 
 [].forEach.call(formButtons, (btn) => {
-  btn.addEventListener(`click`, () => {
-    renderScreen(statsScreen);
-  });
+  btn.addEventListener(`click`, () => renderScreen(statsScreen));
 });
 
 export default html;

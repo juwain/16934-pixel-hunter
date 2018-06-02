@@ -21,8 +21,6 @@ const html = createElementFromTemplate(`<div id="main" class="central__content">
 
 const btnShowNextScreen = html.querySelector(`.intro__asterisk`);
 
-btnShowNextScreen.addEventListener(`click`, () => {
-  renderScreen(greetingScreen);
-});
+btnShowNextScreen.addEventListener(`click`, () => renderScreen(greetingScreen));
 
 export default html;

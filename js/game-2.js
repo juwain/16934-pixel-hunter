@@ -59,8 +59,6 @@ const html = createElementFromTemplate(`<header class="header">
 
 const formGame = html.querySelector(`.game__content`);
 
-formGame.addEventListener(`input`, () => {
-  renderScreen(game3Screen);
-});
+formGame.addEventListener(`input`, () => renderScreen(game3Screen));
 
 export default html;
