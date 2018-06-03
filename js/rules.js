@@ -1,7 +1,7 @@
 import createElementFromTemplate from './createElementFromTemplate.js';
 import renderScreen from './renderScreen.js';
 import game1Screen from './game-1.js';
-import {backButtonTemplate, onButtonBackClick} from './back-button.js';
+import {backButtonTemplate, backButtonClickHandler} from './back-button.js';
 
 const html = createElementFromTemplate(`<header class="header">
   ${backButtonTemplate}
@@ -48,7 +48,7 @@ inputPlayerName.addEventListener(`input`, () => {
   btnSubmitForm.disabled = !inputPlayerName.value.trim().length > 0;
 });
 
-btnBack.addEventListener(`click`, onButtonBackClick);
+btnBack.addEventListener(`click`, backButtonClickHandler);
 
 export default html;
 

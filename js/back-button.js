@@ -8,6 +8,6 @@ export const backButtonTemplate = `<div class="header__back">
   </button>
 </div>`;
 
-export const onButtonBackClick = () => renderScreen(greetingScreen);
+export const backButtonClickHandler = () => renderScreen(greetingScreen);
 
 
