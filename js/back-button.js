@@ -9,5 +9,3 @@ export const backButtonTemplate = `<div class="header__back">
 </div>`;
 
 export const backButtonClickHandler = () => renderScreen(greetingScreen);
-
-
