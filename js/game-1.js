@@ -1,5 +1,4 @@
-import createElementFromTemplate from './createElementFromTemplate.js';
-import renderScreen from './renderScreen.js';
+import {createElementFromTemplate, renderScreen} from './util.js';
 import game2Screen from './game-2.js';
 import {backButtonTemplate, backButtonClickHandler} from './back-button.js';
 

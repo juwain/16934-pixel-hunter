@@ -1,4 +1,4 @@
-import renderScreen from './renderScreen.js';
+import {renderScreen} from './util.js';
 import greetingScreen from './greeting.js';
 
 export const backButtonTemplate = `<div class="header__back">

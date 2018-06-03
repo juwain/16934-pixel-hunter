@@ -1,5 +1,4 @@
-import createElementFromTemplate from './createElementFromTemplate.js';
-import renderScreen from './renderScreen.js';
+import {createElementFromTemplate, renderScreen} from './util.js';
 import rulesScreen from './rules.js';
 
 const html = createElementFromTemplate(`<div class="greeting central--blur">

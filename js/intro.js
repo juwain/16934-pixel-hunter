@@ -1,5 +1,4 @@
-import createElementFromTemplate from './createElementFromTemplate.js';
-import renderScreen from './renderScreen.js';
+import {createElementFromTemplate, renderScreen} from './util.js';
 import greetingScreen from './greeting.js';
 
 const html = createElementFromTemplate(`<div id="main" class="central__content">
