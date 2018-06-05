@@ -1,6 +1,6 @@
 import {createElementFromTemplate, renderScreen} from './util.js';
 import greetingScreen from './greeting.js';
-import {footerTemplate} from './footer.js';
+import footerTemplate from './footer.js';
 
 const html = createElementFromTemplate(`<div id="main" class="central__content">
   <div id="intro" class="intro">

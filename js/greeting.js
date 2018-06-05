@@ -1,6 +1,6 @@
 import {createElementFromTemplate, renderScreen} from './util.js';
 import rulesScreen from './rules.js';
-import {footerTemplate} from './footer.js';
+import footerTemplate from './footer.js';
 
 const html = createElementFromTemplate(`<div class="greeting central--blur">
 <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>

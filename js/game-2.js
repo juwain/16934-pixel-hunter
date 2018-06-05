@@ -1,7 +1,7 @@
 import {createElementFromTemplate, renderScreen} from './util.js';
 import game3Screen from './game-3.js';
 import backButton from './back-button.js';
-import {footerTemplate} from './footer.js';
+import footerTemplate from './footer.js';
 
 const html = createElementFromTemplate(`<header class="header">
   ${backButton}

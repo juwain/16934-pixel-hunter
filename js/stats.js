@@ -1,6 +1,6 @@
 import {createElementFromTemplate} from './util.js';
 import backButton from './back-button.js';
-import {footerTemplate} from './footer.js';
+import footerTemplate from './footer.js';
 
 const html = createElementFromTemplate(`<header class="header">
   ${backButton}
