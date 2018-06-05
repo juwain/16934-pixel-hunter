@@ -1,6 +1,7 @@
 import {createElementFromTemplate, renderScreen} from './util.js';
 import rulesScreen from './rules.js';
 import footerTemplate from './footer.js';
+import {renderBackButton} from './back-button.js';
 
 const html = createElementFromTemplate(`<div class="greeting central--blur">
 <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
@@ -19,7 +20,10 @@ ${footerTemplate}`);
 
 const btnShowNextScreen = html.querySelector(`.greeting__continue`);
 
-btnShowNextScreen.addEventListener(`click`, () => renderScreen(rulesScreen));
+btnShowNextScreen.addEventListener(`click`, () => {
+  renderScreen(rulesScreen);
+  renderBackButton(rulesScreen);
+});
 
 export default html;
 

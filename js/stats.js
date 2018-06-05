@@ -1,9 +1,7 @@
 import {createElementFromTemplate} from './util.js';
-import backButton from './back-button.js';
 import footerTemplate from './footer.js';
 
 const html = createElementFromTemplate(`<header class="header">
-  ${backButton}
 </header>
 <div class="result">
   <h1>Победа!</h1>

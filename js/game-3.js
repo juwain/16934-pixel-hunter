@@ -1,10 +1,9 @@
 import {createElementFromTemplate, renderScreen} from './util.js';
 import statsScreen from './stats.js';
-import backButton from './back-button.js';
 import footerTemplate from './footer.js';
+import {renderBackButton} from './back-button.js';
 
 const html = createElementFromTemplate(`<header class="header">
-  ${backButton}
   <h1 class="game__timer">NN</h1>
   <div class="game__lives">
     <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
@@ -45,7 +44,10 @@ ${footerTemplate}`);
 const formButtons = html.querySelectorAll(`.game__option`);
 
 Array.from(formButtons).forEach((btn) => {
-  btn.addEventListener(`click`, () => renderScreen(statsScreen));
+  btn.addEventListener(`click`, () => {
+    renderScreen(statsScreen);
+    renderBackButton(statsScreen);
+  });
 });
 
 export default html;
