@@ -65,17 +65,11 @@ const html = createElementFromTemplate(`<header class="header">
 
 const formGame = html.querySelector(`.game__content`);
 const btnBack = html.querySelector(`button.back`);
-const inputNames = [
-  `question1`,
-  `question2`
-];
 
 formGame.addEventListener(`input`, () => {
-  const result = inputNames.every((name) => {
-    return [].some.call(formGame.elements[name], (field) => field.checked);
-  });
+  const answers = Array.from(formGame.elements).filter((element) => element.checked);
 
-  if (result) {
+  if (answers.length === 2) {
     renderScreen(game2Screen);
   }
 });
