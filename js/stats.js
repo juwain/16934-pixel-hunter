@@ -1,9 +1,9 @@
 import {createElementFromTemplate} from './util.js';
-import {backButtonTemplate, backButtonClickHandler} from './back-button.js';
+import backButton from './back-button.js';
 import {footerTemplate} from './footer.js';
 
 const html = createElementFromTemplate(`<header class="header">
-  ${backButtonTemplate}
+  ${backButton}
 </header>
 <div class="result">
   <h1>Победа!</h1>
@@ -106,9 +106,5 @@ const html = createElementFromTemplate(`<header class="header">
   </table>
 </div>
 ${footerTemplate}`);
-
-const btnBack = html.querySelector(`button.back`);
-
-btnBack.addEventListener(`click`, backButtonClickHandler);
 
 export default html;

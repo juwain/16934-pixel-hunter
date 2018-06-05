@@ -1,10 +1,10 @@
 import {createElementFromTemplate, renderScreen} from './util.js';
 import game1Screen from './game-1.js';
-import {backButtonTemplate, backButtonClickHandler} from './back-button.js';
+import backButton from './back-button.js';
 import {footerTemplate} from './footer.js';
 
 const html = createElementFromTemplate(`<header class="header">
-  ${backButtonTemplate}
+  ${backButton}
 </header>
 <div class="rules">
   <h1 class="rules__title">Правила</h1>
@@ -27,7 +27,6 @@ ${footerTemplate}`);
 const formPlayerInfo = html.querySelector(`.rules__form`);
 const inputPlayerName = html.querySelector(`.rules__input`);
 const btnSubmitForm = html.querySelector(`.continue`);
-const btnBack = html.querySelector(`button.back`);
 
 formPlayerInfo.addEventListener(`submit`, (evt) => {
   evt.preventDefault();
@@ -38,8 +37,6 @@ formPlayerInfo.addEventListener(`submit`, (evt) => {
 inputPlayerName.addEventListener(`input`, () => {
   btnSubmitForm.disabled = !inputPlayerName.value.trim().length > 0;
 });
-
-btnBack.addEventListener(`click`, backButtonClickHandler);
 
 export default html;
 

@@ -1,10 +1,10 @@
 import {createElementFromTemplate, renderScreen} from './util.js';
 import game3Screen from './game-3.js';
-import {backButtonTemplate, backButtonClickHandler} from './back-button.js';
+import backButton from './back-button.js';
 import {footerTemplate} from './footer.js';
 
 const html = createElementFromTemplate(`<header class="header">
-  ${backButtonTemplate}
+  ${backButton}
   <h1 class="game__timer">NN</h1>
   <div class="game__lives">
     <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
@@ -45,9 +45,7 @@ const html = createElementFromTemplate(`<header class="header">
 ${footerTemplate}`);
 
 const formGame = html.querySelector(`.game__content`);
-const btnBack = html.querySelector(`button.back`);
 
 formGame.addEventListener(`input`, () => renderScreen(game3Screen));
-btnBack.addEventListener(`click`, backButtonClickHandler);
 
 export default html;
