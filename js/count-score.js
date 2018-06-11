@@ -4,10 +4,22 @@ const MIN_ANSWERS_COUNT = 10;
 const ANSWER_SCORE_COUNT = 100;
 const ANSWER_SCORE_CORRECTION = 50;
 
-export const countScore = (arrAnswers, livesCount) => {
+export const countScore = (arrAnswers, livesNumber) => {
+  if (!arrAnswers || !Array.isArray(arrAnswers)) {
+    throw new Error(`Answers should be array`);
+  }
+
+  if (typeof livesNumber !== `number`) {
+    throw new Error(`Lives number should be of type number`);
+  }
+
+  if (livesNumber < 0) {
+    throw new Error(`Lives number should not be negative value`);
+  }
+
   let scoreCount = 0;
 
-  if (arrAnswers.length < MIN_ANSWERS_COUNT || livesCount === 0) {
+  if (arrAnswers.length < MIN_ANSWERS_COUNT || livesNumber === 0) {
     return -1;
   }
 
@@ -24,7 +36,7 @@ export const countScore = (arrAnswers, livesCount) => {
   });
 
   if (arrAnswers.length >= MIN_ANSWERS_COUNT) {
-    for (let i = 0; i < livesCount; i++) {
+    for (let i = 0; i < livesNumber; i++) {
       scoreCount += ANSWER_SCORE_CORRECTION;
     }
   }
