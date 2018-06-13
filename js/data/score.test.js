@@ -3,7 +3,8 @@ import {countScore} from '../count-score.js';
 
 const testAnswersArrays = [
   [
-    {isRight: true, time: 10}],
+    {isRight: true, time: 10}
+  ],
   [
     {isRight: true, time: 15},
     {isRight: true, time: 15},
