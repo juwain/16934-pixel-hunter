@@ -4,7 +4,7 @@
   "private": true,
   "description": "Личный проект «Пиксель хантер» от HTML Academy",
   "scripts": {
-    "eslint": "eslint .",
+    "eslint": "eslint ./gulpfile.js, js/",
     "build": "gulp build",
     "start": "gulp serve",
     "test": "npm run eslint && gulp test"
