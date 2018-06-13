@@ -23,7 +23,7 @@ export const countScore = (arrAnswers, livesNumber) => {
     return -1;
   }
 
-  arrAnswers.forEach((answer) => {
+  for (let answer of arrAnswers) {
     if (answer.isRight) {
       scoreCount += ANSWER_SCORE_COUNT;
 
@@ -33,7 +33,7 @@ export const countScore = (arrAnswers, livesNumber) => {
         scoreCount -= ANSWER_SCORE_CORRECTION;
       }
     }
-  });
+  }
 
   if (arrAnswers.length >= MIN_ANSWERS_COUNT) {
     for (let i = 0; i < livesNumber; i++) {
