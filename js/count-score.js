@@ -6,7 +6,7 @@ const ANSWER_SCORE_CORRECTION = 50;
 
 export const countScore = (arrAnswers, livesNumber) => {
   if (!arrAnswers || !Array.isArray(arrAnswers)) {
-    throw new Error(`Answers should be array`);
+    throw new Error(`Answers should be an array`);
   }
 
   if (typeof livesNumber !== `number`) {
