@@ -1,21 +1,17 @@
-class Timer {
-  constructor(time) {
-    this.time = time;
-  }
-
-  tick() {
-    if (this.time > 0) {
-      this.time--;
-    }
-
-    return this.time > 0;
-  }
-}
-
-export const createTimer = (time) => {
-  if (typeof time !== `number`) {
+export const createTimer = (initialTime) => {
+  if (typeof initialTime !== `number`) {
     throw new Error(`Time argument should be of type number`);
   }
 
-  return new Timer(time);
+  let time = initialTime;
+
+  return {
+    tick() {
+      if (time > 0) {
+        time--;
+      }
+
+      return time > 0;
+    }
+  };
 };

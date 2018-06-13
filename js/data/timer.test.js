@@ -7,11 +7,6 @@ describe(`Timer function`, () => {
     assert.equal(typeof testTimer.tick, `function`);
   });
 
-  it(`should decrement time property of an object`, () => {
-    const testTimer = createTimer(2);
-    testTimer.tick();
-    assert.equal(testTimer.time, 1);
-  });
 
   it(`should return true if timer is still on`, () => {
     const testTimer = createTimer(10);
@@ -21,7 +16,6 @@ describe(`Timer function`, () => {
     }
 
     assert.isTrue(testTimer.tick());
-    assert.equal(testTimer.time, 7);
   });
 
   it(`should return false if timer is off`, () => {
@@ -30,16 +24,6 @@ describe(`Timer function`, () => {
     testTimer.tick();
 
     assert.isFalse(testTimer.tick());
-    assert.equal(testTimer.time, 0);
-  });
-
-  it(`should not decrement time property if timer is off`, () => {
-    const testTimer = createTimer(1);
-
-    testTimer.tick();
-
-    assert.isFalse(testTimer.tick());
-    assert.equal(testTimer.time, 0);
   });
 
   it(`should return Object`, () => {
