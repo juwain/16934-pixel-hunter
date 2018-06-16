@@ -2,6 +2,7 @@ import {createElementFromTemplate, renderScreen} from './util.js';
 import game1Screen from './game-1.js';
 import footerTemplate from './footer.js';
 import {renderBackButton} from './back-button.js';
+import {renderHeader} from './header.js';
 
 const html = createElementFromTemplate(`<header class="header">
 </header>
@@ -31,6 +32,7 @@ formPlayerInfo.addEventListener(`submit`, (evt) => {
   evt.preventDefault();
 
   renderScreen(game1Screen);
+  renderHeader(game1Screen);
   renderBackButton(game1Screen);
 });
 

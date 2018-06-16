@@ -3,15 +3,7 @@ import game2Screen from './game-2.js';
 import footerTemplate from './footer.js';
 import {renderBackButton} from './back-button.js';
 
-const html = createElementFromTemplate(`<header class="header">
-  <h1 class="game__timer">NN</h1>
-  <div class="game__lives">
-    <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
-    <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-    <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-  </div>
-</header>
-<div class="game">
+const html = createElementFromTemplate(`<div class="game">
   <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
   <form class="game__content">
     <div class="game__option">
