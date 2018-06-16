@@ -12,17 +12,19 @@ const images = {
 };
 
 const levelTypes = {
-  'single': {
+  '1': {
     question: `Угадай, фото или рисунок?`,
+    type: `single`,
     answers: [
       {
         type: `painting`,
-        url: images.questionpaintings[0]
+        url: images.paintings[0]
       }
     ]
   },
-  'double': {
+  '2': {
     question: `Угадайте для каждого изображения фото или рисунок?`,
+    type: `double`,
     answers: [
       {
         type: `photo`,
@@ -30,12 +32,13 @@ const levelTypes = {
       },
       {
         type: `painting`,
-        url: images.painting[1]
+        url: images.paintings[1]
       }
     ]
   },
-  'triple': {
+  '3': {
     question: `Найдите рисунок среди изображений`,
+    type: `triple`,
     answers: [
       {
         type: `photo`,
@@ -43,7 +46,7 @@ const levelTypes = {
       },
       {
         type: `painting`,
-        url: images.painting[2]
+        url: images.paintings[2]
       },
       {
         type: `photo`,
@@ -53,10 +56,20 @@ const levelTypes = {
   }
 };
 
-const LEVELS_COUNT = 10;
+const LEVELS_COUNT = 3;
 
 export const generateLevelsData = () => {
-  for (let i = 0; i < LEVELS_COUNT; i++) {
+  let data = [];
 
+  for (let i = 1; i <= LEVELS_COUNT; i++) {
+    data.push(levelTypes[i]);
   }
+
+  return data;
+};
+
+export const gameState = {
+  livesCount: 3,
+  time: 50,
+  isOver: false
 };
