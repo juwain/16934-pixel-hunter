@@ -1,10 +1,5 @@
 import {createElementFromTemplate} from './util.js';
 
-const initialState = {
-  livesCount: 3,
-  time: 0
-};
-
 const createHeader = (data) => createElementFromTemplate(`<header class="header">
 <h1 class="game__timer">${data.time}</h1>
 <div class="game__lives">
@@ -17,7 +12,7 @@ const createHeader = (data) => createElementFromTemplate(`<header class="header"
 </div>
 </header>`);
 
-export const renderHeader = (container) => {
-  container.insertAdjacentElement(`afterbegin`, createHeader(initialState));
+export const renderHeader = (container, state) => {
+  container.insertAdjacentElement(`afterbegin`, createHeader(state));
 };
 
