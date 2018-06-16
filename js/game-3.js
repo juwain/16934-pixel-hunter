@@ -1,5 +1,5 @@
 import {createElementFromTemplate, renderScreen} from './util.js';
-import statsScreen from './stats.js';
+import resultsScreen from './results.js';
 import footerTemplate from './footer.js';
 import {renderBackButton} from './back-button.js';
 
@@ -45,8 +45,8 @@ const formButtons = html.querySelectorAll(`.game__option`);
 
 Array.from(formButtons).forEach((btn) => {
   btn.addEventListener(`click`, () => {
-    renderScreen(statsScreen);
-    renderBackButton(statsScreen);
+    renderScreen(resultsScreen);
+    renderBackButton(resultsScreen);
   });
 });
 
