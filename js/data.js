@@ -1,44 +1,62 @@
-const levelsData = {
-  'level-1': {
-    question: `Угадайте для каждого изображения фото или рисунок?`,
-    type: `double`,
-    images: new Set(
-      `https://k42.kn3.net/CF42609C8.jpg`,
-      `http://i.imgur.com/1KegWPz.jpg`
-    ),
-    answers: new Set(
-      `painting`,
-      `photo`
-    )
-  },
-  'level-2': {
+const images = {
+  paintings: [
+    `https://k42.kn3.net/CF42609C8.jpg`,
+    `https://k42.kn3.net/D2F0370D6.jpg`,
+    `https://k32.kn3.net/5C7060EC5.jpg`
+  ],
+  photos: [
+    `http://i.imgur.com/1KegWPz.jpg`,
+    `https://i.imgur.com/DiHM5Zb.jpg`,
+    `http://i.imgur.com/DKR1HtB.jpg`
+  ]
+};
+
+const levelTypes = {
+  'single': {
     question: `Угадай, фото или рисунок?`,
-    type: `single`,
-    images: [
+    answers: [
       {
-        url: `https://k42.kn3.net/D2F0370D6.jpg`,
-        type: `painting`
+        type: `painting`,
+        url: images.questionpaintings[0]
       }
     ]
   },
-  'level-3': {
+  'double': {
+    question: `Угадайте для каждого изображения фото или рисунок?`,
+    answers: [
+      {
+        type: `photo`,
+        url: images.photos[0]
+      },
+      {
+        type: `painting`,
+        url: images.painting[1]
+      }
+    ]
+  },
+  'triple': {
     question: `Найдите рисунок среди изображений`,
-    type: `triple`,
-    images: [
+    answers: [
       {
-        url: `https://k32.kn3.net/5C7060EC5.jpg`,
-        type: `painting`
+        type: `photo`,
+        url: images.photos[1]
       },
       {
-        url: `https://i.imgur.com/DiHM5Zb.jpg`,
-        type: `photo`
+        type: `painting`,
+        url: images.painting[2]
       },
       {
-        url: `http://i.imgur.com/DKR1HtB.jpg`,
-        type: `photo`
+        type: `photo`,
+        url: images.photos[2]
       }
     ]
   }
 };
 
-export default levelsData;
+const LEVELS_COUNT = 10;
+
+export const generateLevelsData = () => {
+  for (let i = 0; i < LEVELS_COUNT; i++) {
+
+  }
+};
