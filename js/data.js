@@ -18,7 +18,7 @@ const levelTypes = {
     answers: [
       {
         type: `painting`,
-        url: images.paintings[0]
+        url: images.paintings[1]
       }
     ]
   },
@@ -32,7 +32,7 @@ const levelTypes = {
       },
       {
         type: `painting`,
-        url: images.paintings[1]
+        url: images.paintings[0]
       }
     ]
   },
