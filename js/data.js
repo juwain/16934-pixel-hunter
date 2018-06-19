@@ -32,7 +32,7 @@ const levelTypes = {
       },
       {
         type: `painting`,
-        url: images.paintings[0]
+        url: images.paintings[2]
       }
     ]
   },
@@ -46,7 +46,7 @@ const levelTypes = {
       },
       {
         type: `painting`,
-        url: images.paintings[2]
+        url: images.paintings[0]
       },
       {
         type: `photo`,
@@ -69,7 +69,9 @@ export const generateLevelsData = () => {
 };
 
 export const gameState = {
-  livesCount: 3,
+  livesNumber: 3,
   time: 50,
-  isOver: false
+  isOver: false,
+  username: ``,
+  answers: []
 };
