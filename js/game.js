@@ -1,10 +1,14 @@
-// import { createElementFromTemplate, renderScreen } from './util.js';
-import {createElementFromTemplate} from './util.js';
+import {createElementFromTemplate, renderScreen} from './util.js';
 import footerTemplate from './footer.js';
 import {generateLevelsData} from './data.js';
 import {renderHeader} from './header.js';
 import {renderStats} from './stats.js';
 import {gameState} from './data.js';
+import {getResults} from './results.js';
+import {renderBackButton} from './back-button.js';
+
+const gameData = generateLevelsData();
+const currentGameState = Object.assign({}, gameState);
 
 const createGameContainer = () => {
   return createElementFromTemplate(`<div class="game"></div>${footerTemplate}`);
@@ -81,48 +85,69 @@ const fillGameLevel = (level) => {
 };
 
 const renderGameLevel = (index) => {
-  const gameBox = gameContainer.querySelector(`.game`);
-  const level = gameData[index];
-  const gameLevel = fillGameLevel(level);
-
-  gameBox.innerHTML = ``;
-  gameBox.insertAdjacentElement(`afterbegin`, gameLevel);
-
-
-  switch (level.type) {
-    case `single`:
-      gameBox.querySelector(`.game__content`).addEventListener(`input`, () => {
-        renderGameLevel(++index);
-      });
-
-      break;
-
-    case `double`:
-      gameBox.querySelector(`.game__content`).addEventListener(`input`, (evt) => {
-        const answers = Array.from(evt.currentTarget.elements).filter((element) => element.checked);
-
-        if (answers.length === 2) {
-          renderGameLevel(++index);
-        }
-      });
-
-      break;
-
-    case `triple`:
-      Array.from(gameBox.querySelectorAll(`.game__option`)).forEach((btn) => {
-        btn.addEventListener(`click`, () => renderGameLevel(++index));
-      });
-
-      break;
+  if (index === gameData.length) {
+    currentGameState.isOver = true;
   }
 
-  renderStats(gameBox);
+  if (!currentGameState.isOver) {
+    const gameBox = gameContainer.querySelector(`.game`);
+    const level = gameData[index];
+    const gameLevel = fillGameLevel(level);
+
+    gameBox.innerHTML = ``;
+    gameBox.insertAdjacentElement(`afterbegin`, gameLevel);
+
+    switch (level.type) {
+      case `single`:
+        gameBox.querySelector(`.game__content`).addEventListener(`input`, () => {
+          renderGameLevel(++index);
+        });
+
+        break;
+
+      case `double`:
+        gameBox.querySelector(`.game__content`).addEventListener(`input`, (evt) => {
+          const answers = Array.from(evt.currentTarget.elements).filter((element) => element.checked);
+
+          if (answers.length === 2) {
+            renderGameLevel(++index);
+          }
+        });
+
+        break;
+
+      case `triple`:
+        Array.from(gameBox.querySelectorAll(`.game__option`)).forEach((btn) => {
+          btn.addEventListener(`click`, () => renderGameLevel(++index));
+        });
+
+        break;
+    }
+
+    renderStats(gameBox);
+  } else {
+    const resultsScreen = getResults(Object.assign(currentGameState, {
+      answers: [
+        {isRight: true, time: 15},
+        {isRight: true, time: 15},
+        {isRight: true, time: 15},
+        {isRight: true, time: 15},
+        {isRight: true, time: 15},
+        {isRight: true, time: 15},
+        {isRight: true, time: 15},
+        {isRight: true, time: 15},
+        {isRight: true, time: 15},
+        {isRight: true, time: 15}
+      ]
+    }));
+    renderScreen(resultsScreen);
+    renderBackButton(resultsScreen);
+  }
 };
 
-const gameData = generateLevelsData();
 const gameContainer = createGameContainer();
 
 renderGameLevel(0);
-renderHeader(gameContainer, gameState);
+renderHeader(gameContainer, currentGameState);
 
 export default gameContainer;
