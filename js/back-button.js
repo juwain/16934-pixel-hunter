@@ -13,5 +13,9 @@ const btnBack = html.querySelector(`button.back`);
 btnBack.addEventListener(`click`, () => renderScreen(greetingScreen));
 
 export const renderBackButton = (container) => {
-  container.querySelector(`header.header`).insertAdjacentElement(`afterbegin`, html);
+  if (!container.classList.contains(`header`)) {
+    container = container.querySelector(`header.header`);
+  }
+
+  container.insertAdjacentElement(`afterbegin`, html);
 };
