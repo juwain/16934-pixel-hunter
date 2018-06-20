@@ -1,21 +1,15 @@
 import {createElementFromTemplate} from './util.js';
 
-const createStats = () => createElementFromTemplate(`<div class="stats">
+const createStats = (gameState) => createElementFromTemplate(`<div class="stats">
   <ul class="stats">
-    <li class="stats__result stats__result--wrong"></li>
-    <li class="stats__result stats__result--slow"></li>
+    ${gameState.answers.map((answer) => `<li class="stats__result stats__result--${answer.isRight ? `correct` : `wrong`}">${answer.time}</li>`).join(``)}
+    <!--<li class="stats__result stats__result--slow"></li>
     <li class="stats__result stats__result--fast"></li>
-    <li class="stats__result stats__result--correct"></li>
-    <li class="stats__result stats__result--unknown"></li>
-    <li class="stats__result stats__result--unknown"></li>
-    <li class="stats__result stats__result--unknown"></li>
-    <li class="stats__result stats__result--unknown"></li>
-    <li class="stats__result stats__result--unknown"></li>
-    <li class="stats__result stats__result--unknown"></li>
+    <li class="stats__result stats__result--unknown"></li>-->
   </ul>
 </div>`);
 
-export const renderStats = (container) => {
-  container.insertAdjacentElement(`beforeend`, createStats());
+export const renderStats = (container, gameState) => {
+  container.insertAdjacentElement(`beforeend`, createStats(gameState));
 };
 
