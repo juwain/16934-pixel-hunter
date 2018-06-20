@@ -56,13 +56,17 @@ const levelTypes = {
   }
 };
 
-const LEVELS_COUNT = 3;
+const LEVELS_COUNT = 10;
+
+const getRandomIntFromRange = (from, to) => {
+  return Math.floor(Math.random() * to) + from;
+};
 
 export const generateLevelsData = () => {
   let data = [];
 
   for (let i = 1; i <= LEVELS_COUNT; i++) {
-    data.push(levelTypes[i]);
+    data.push(levelTypes[getRandomIntFromRange(1, 3)]);
   }
 
   return data;
@@ -72,6 +76,7 @@ export const gameState = {
   livesNumber: 3,
   time: 50,
   isOver: false,
+  isWin: false,
   username: ``,
   answers: []
 };
