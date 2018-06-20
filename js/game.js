@@ -11,7 +11,11 @@ const gameData = generateLevelsData();
 const currentGameState = Object.assign({}, gameState);
 
 const createGameContainer = () => {
-  return createElementFromTemplate(`<div class="game"></div>${footerTemplate}`);
+  return createElementFromTemplate(`
+    <header class="header"></header>
+    <div class="game"></div>
+    ${footerTemplate}
+  `);
 };
 
 const fillGameLevel = (level) => {
@@ -28,7 +32,7 @@ const fillGameLevel = (level) => {
               <span>Фото</span>
             </label>
             <label class="game__answer  game__answer--wide  game__answer--paint">
-              <input name="question1" type="radio" value="paint">
+              <input name="question1" type="radio" value="painting">
               <span>Рисунок</span>
             </label>
           </div>
@@ -46,7 +50,7 @@ const fillGameLevel = (level) => {
               <span>Фото</span>
             </label>
             <label class="game__answer game__answer--paint">
-              <input name="question1" type="radio" value="paint">
+              <input name="question1" type="radio" value="painting">
               <span>Рисунок</span>
             </label>
           </div>
@@ -57,7 +61,7 @@ const fillGameLevel = (level) => {
               <span>Фото</span>
             </label>
             <label class="game__answer  game__answer--paint">
-              <input name="question2" type="radio" value="paint">
+              <input name="question2" type="radio" value="painting">
               <span>Рисунок</span>
             </label>
           </div>
@@ -68,13 +72,13 @@ const fillGameLevel = (level) => {
       html = createElementFromTemplate(`
         <p class="game__task">${level.question}</p>
         <form class="game__content  game__content--triple">
-          <div class="game__option">
+          <div class="game__option" data-type="${level.answers[0].type}">
             <img src="${level.answers[0].url}" alt="Option 1" width="304" height="455">
           </div>
-          <div class="game__option">
+          <div class="game__option" data-type="${level.answers[1].type}">
             <img src="${level.answers[1].url}" alt="Option 1" width="304" height="455">
           </div>
-          <div class="game__option">
+          <div class="game__option" data-type="${level.answers[2].type}">
             <img src="${level.answers[2].url}" alt="Option 1" width="304" height="455">
           </div>
         </form>`);
@@ -84,8 +88,18 @@ const fillGameLevel = (level) => {
   return html;
 };
 
+const switchLevel = (index, answer) => {
+  currentGameState.answers.push(answer);
+
+  if (!answer.isRight) {
+    currentGameState.livesNumber--;
+  }
+
+  renderGameLevel(++index);
+};
+
 const renderGameLevel = (index) => {
-  if (index === gameData.length) {
+  if (index === gameData.length || currentGameState.livesNumber === 0) {
     currentGameState.isOver = true;
   }
 
@@ -99,8 +113,11 @@ const renderGameLevel = (index) => {
 
     switch (level.type) {
       case `single`:
-        gameBox.querySelector(`.game__content`).addEventListener(`input`, () => {
-          renderGameLevel(++index);
+        gameBox.querySelector(`.game__content`).addEventListener(`input`, (evt) => {
+          switchLevel(index, {
+            isRight: evt.currentTarget.elements[`question1`].value === gameData[index].answers[0].type,
+            time: 15 // temp hardcoded value
+          });
         });
 
         break;
@@ -110,7 +127,12 @@ const renderGameLevel = (index) => {
           const answers = Array.from(evt.currentTarget.elements).filter((element) => element.checked);
 
           if (answers.length === 2) {
-            renderGameLevel(++index);
+            switchLevel(index, {
+              isRight: answers.every((answer, answerIndex) => {
+                return answer.value === gameData[index].answers[answerIndex].type;
+              }),
+              time: 15 // temp hardcoded value
+            });
           }
         });
 
@@ -118,28 +140,25 @@ const renderGameLevel = (index) => {
 
       case `triple`:
         Array.from(gameBox.querySelectorAll(`.game__option`)).forEach((btn) => {
-          btn.addEventListener(`click`, () => renderGameLevel(++index));
+          btn.addEventListener(`click`, (evt) => {
+            switchLevel(index, {
+              isRight: evt.currentTarget.dataset[`type`] === `painting`,
+              time: 15 // temp hardcoded value
+            });
+          });
         });
 
         break;
     }
 
-    renderStats(gameBox);
+    renderHeader(gameContainer, currentGameState);
+    renderStats(gameBox, currentGameState);
   } else {
-    const resultsScreen = getResults(Object.assign(currentGameState, {
-      answers: [
-        {isRight: true, time: 15},
-        {isRight: true, time: 15},
-        {isRight: true, time: 15},
-        {isRight: true, time: 15},
-        {isRight: true, time: 15},
-        {isRight: true, time: 15},
-        {isRight: true, time: 15},
-        {isRight: true, time: 15},
-        {isRight: true, time: 15},
-        {isRight: true, time: 15}
-      ]
-    }));
+    if (currentGameState.livesNumber > 0) {
+      currentGameState.isWin = true;
+    }
+
+    const resultsScreen = getResults(currentGameState);
     renderScreen(resultsScreen);
     renderBackButton(resultsScreen);
   }
