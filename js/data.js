@@ -11,8 +11,8 @@ const images = {
   ]
 };
 
-const levelTypes = {
-  '1': {
+const levelTemplates = [
+  {
     question: `Угадай, фото или рисунок?`,
     type: `single`,
     answers: [
@@ -22,7 +22,7 @@ const levelTypes = {
       }
     ]
   },
-  '2': {
+  {
     question: `Угадайте для каждого изображения фото или рисунок?`,
     type: `double`,
     answers: [
@@ -36,7 +36,7 @@ const levelTypes = {
       }
     ]
   },
-  '3': {
+  {
     question: `Найдите рисунок среди изображений`,
     type: `triple`,
     answers: [
@@ -54,7 +54,7 @@ const levelTypes = {
       }
     ]
   }
-};
+];
 
 const LEVELS_COUNT = 10;
 
@@ -63,16 +63,16 @@ const getRandomIntFromRange = (from, to) => {
 };
 
 export const generateLevelsData = () => {
-  let data = [];
+  const data = [];
 
   for (let i = 1; i <= LEVELS_COUNT; i++) {
-    data.push(levelTypes[getRandomIntFromRange(1, 3)]);
+    data.push(levelTemplates[getRandomIntFromRange(0, 2)]);
   }
 
   return data;
 };
 
-export const gameState = {
+export const INITIAL_STATE = {
   livesNumber: 3,
   time: 50,
   isOver: false,

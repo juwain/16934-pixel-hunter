@@ -3,12 +3,12 @@ import footerTemplate from './footer.js';
 import {generateLevelsData} from './data.js';
 import {renderHeader} from './header.js';
 import {renderStats} from './stats.js';
-import {gameState} from './data.js';
+import {INITIAL_STATE} from './data.js';
 import {getResults} from './results.js';
 import {renderBackButton} from './back-button.js';
 
 const gameData = generateLevelsData();
-const currentGameState = Object.assign({}, gameState);
+const gameState = Object.assign({}, INITIAL_STATE);
 
 const createGameContainer = () => {
   return createElementFromTemplate(`
@@ -89,21 +89,21 @@ const fillGameLevel = (level) => {
 };
 
 const switchLevel = (index, answer) => {
-  currentGameState.answers.push(answer);
+  gameState.answers.push(answer);
 
   if (!answer.isRight) {
-    currentGameState.livesNumber--;
+    gameState.livesNumber--;
   }
 
   renderGameLevel(++index);
 };
 
 const renderGameLevel = (index) => {
-  if (index === gameData.length || currentGameState.livesNumber === 0) {
-    currentGameState.isOver = true;
+  if (index === gameData.length || gameState.livesNumber === 0) {
+    gameState.isOver = true;
   }
 
-  if (!currentGameState.isOver) {
+  if (!gameState.isOver) {
     const gameBox = gameContainer.querySelector(`.game`);
     const level = gameData[index];
     const gameLevel = fillGameLevel(level);
@@ -151,14 +151,14 @@ const renderGameLevel = (index) => {
         break;
     }
 
-    renderHeader(gameContainer, currentGameState);
-    renderStats(gameBox, currentGameState);
+    renderHeader(gameContainer, gameState);
+    renderStats(gameBox, gameState);
   } else {
-    if (currentGameState.livesNumber > 0) {
-      currentGameState.isWin = true;
+    if (gameState.livesNumber > 0) {
+      gameState.isWin = true;
     }
 
-    const resultsScreen = getResults(currentGameState);
+    const resultsScreen = getResults(gameState);
     renderScreen(resultsScreen);
     renderBackButton(resultsScreen);
   }
@@ -167,6 +167,6 @@ const renderGameLevel = (index) => {
 const gameContainer = createGameContainer();
 
 renderGameLevel(0);
-renderHeader(gameContainer, currentGameState);
+renderHeader(gameContainer, gameState);
 
 export default gameContainer;
